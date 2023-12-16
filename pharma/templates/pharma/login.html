@@ -1,0 +1,91 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            background: gray;
+        }
+
+        .box {
+            width: 350px;
+            height: 400px;
+            padding: 45px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        }
+
+        .box h1 {
+            text-transform: uppercase;
+            color: #0074E4;
+        }
+
+        .box input[type="text"],
+        .box input[type="password"] {
+            border: 0;
+            background: none;
+            display: block;
+            margin: 25px auto;
+            text-align: center;
+            outline: none;
+            padding: 12px 12px;
+            width: 245px;
+            color: #fff;
+            border-bottom: 1px solid #264E86;  /* Add this line to mimic the focus effect */
+        }
+
+        .box input[type="submit"] {
+            outline: none;
+            background: #90B77D;
+            border: none;
+            padding: 8px 16px;
+            color: #fff;
+            font-weight: 800;
+            cursor: pointer;  /* Add this line to indicate the submit button is clickable */
+        }
+
+        .box input[type="submit"]:hover {
+            background: #43A047;
+            -webkit-transition: background 0.3s ease-in-out;
+            -moz-transition: background 0.3s ease-in-out;
+            transition: background-color 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form action="{% url 'pharma:login' %}" method="post">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <input type="text" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+
+        <footer class="ftr">
+            <p>&copy; <span>Iso</span></p>
+        </footer>
+    </div>
+</body>
+
+</html>
+{% endblock %}
+

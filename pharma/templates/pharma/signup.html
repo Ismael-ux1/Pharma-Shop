@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+
+    <!-- Add your custom styles here -->
+    <style>
+        .container {
+            height: 100vh;
+            width: 100%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            background-image: radial-gradient(
+                circle farthest-corner at 10% 20%,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0.008) 90%
+            );
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+            width: 400px;
+            height: 440px;
+            background-color: #ffffff;
+            padding: 10px 30px;
+        }
+
+        .card_title {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .card_title h1 {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .form input {
+            margin: 10px 0;
+            width: 100%;
+            background-color: #e2e2e2;
+            border: none;
+            outline: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+        }
+
+        .form button {
+            background-color: #4796ff;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            border-radius: 5px;
+            border: none;
+            padding: 8px 15px;
+            width: 100%;
+        }
+
+        .card_terms {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .card_terms input[type="checkbox"] {
+            background-color: #e2e2e2;
+            padding-top: 5px;
+        }
+
+        .card_terms span {
+            margin: 5px;
+            font-size: 13px;
+        }
+
+        .card a {
+            color: #4796ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card_title">
+                <h1>Create Account</h1>
+                <span>Already have an account? <a href="{% url 'pharma:login' %}">Sign In</a></span>
+            </div>
+            <div class="form">
+                <form action="{% url 'pharma:signup' %}" method="POST">
+                    {% csrf_token %}
+
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endif %}
+
+                    <!-- First Name -->
+                    <input type="text" name="firstname" value="{{values.first_name}}" placeholder="First Name" />
+
+                    <!-- Last Name -->
+                    <input type="text" name="lastname" value="{{values.last_name}}" placeholder="Last Name" />
+
+                    <!-- Phone -->
+                    <input type="text" name="phone" value="{{values.phone}}" placeholder="9876543210" />
+
+                    <!-- Email -->
+                    <input type="email" name="email" value="{{values.email}}" placeholder="abc@gmail.com" />
+
+                    <!-- Password -->
+                    <input type="password" name="password" placeholder="Password" />
+
+                    <!-- Checkme button -->
+                    <div class="mb-3 form-check">
+                        <label class="form-check-label d-grid gap-2" for="exampleCheck1">I have read and agree to the <a href="#">Terms of Service</a></label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-success col-lg-12">Create an account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
